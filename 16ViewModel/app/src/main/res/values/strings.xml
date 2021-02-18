@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">NumberGuessGame</string>
+    <string name="guess_a_number_between_1_and">Guess a number between 1 and</string>
+    <string name="guess">Guess</string>
+    <string name="enter_in_a_number">Enter in a number</string>
+    <string name="CORRECT_MSG">You guessed correctly! The number was</string>
+    <string name="HIGHER_MSG">The correct answer is higher"</string>
+    <string name="LOWER_MSG">The correct answer is lower</string>
+    <string name="HINT_MSG">Number to guess is</string>
+    <string name="MAX_MESSAGE_LIMIT_MSG">Maximum number of guesses made - number was</string>
+    <string name="NEW_NUMBER_MSG">- new number generated</string>
+    <string name="GUESSES_LEFT_MSG">Number of guesses left</string>
+    <string name="INVALID_MSG_PROMPT">"Invalid input (input must be between 1 and</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
