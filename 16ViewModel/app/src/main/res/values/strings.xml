@@ -11,6 +11,4 @@
     <string name="NEW_NUMBER_MSG">- new number generated</string>
     <string name="GUESSES_LEFT_MSG">Number of guesses left</string>
     <string name="INVALID_MSG_PROMPT">"Invalid input (input must be between 1 and</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
