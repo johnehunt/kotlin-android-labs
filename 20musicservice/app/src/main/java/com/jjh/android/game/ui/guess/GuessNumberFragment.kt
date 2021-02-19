@@ -1,27 +1,38 @@
 package com.jjh.android.game.ui.guess
 
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import android.provider.AlarmClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.jjh.android.game.R
+import com.jjh.android.game.service.MusicPlayerService
 import kotlinx.android.synthetic.main.fragment_guess_number.*
 
 
 class GuessNumberFragment : Fragment() {
 
+    companion object {
+        private const val TAG = "GuessNumberFragment"
+    }
+
     private lateinit var invalidMessage: String
     private val viewModel by viewModels<GameViewModel>()
+    private lateinit var service: MusicPlayerService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_guess_number, container, false)
     }
@@ -39,6 +50,33 @@ class GuessNumberFragment : Fragment() {
         openAlaramButton.setOnClickListener {
             onOpenAlarmButtonClick()
         }
+
+        playMusicButton.setOnClickListener {
+            onPlayMusicButtonClick()
+        }
+
+        stopMusicButton.setOnClickListener {
+            stopMusicButtonClick()
+        }
+        stopMusicButton.isEnabled = false
+    }
+
+    private fun onPlayMusicButtonClick() {
+        Log.d(TAG, "onPlayMusicButtonClick()")
+        try {
+            val intent = Intent(this.context, MusicPlayerService::class.java)
+            activity?.bindService(intent, ServiceConnectionHandler(), Context.BIND_AUTO_CREATE)
+            playMusicButton.isEnabled = false
+        } catch (exp: Exception) {
+            Log.d(TAG, "onPlayMusicButtonClick() - ${exp.localizedMessage}")
+        }
+    }
+
+    private fun stopMusicButtonClick() {
+        Log.d(TAG, "onPlayMusicButtonClick()")
+        service.stop()
+        playMusicButton.isEnabled = true
+        stopMusicButton.isEnabled = false
     }
 
     private fun onOpenAlarmButtonClick() {
@@ -85,7 +123,6 @@ class GuessNumberFragment : Fragment() {
         messageTextView.text = invalidMessage
     }
 
-
     private fun resetGame() {
         userGuessEditText.setText("")
         viewModel.resetGameData()
@@ -103,5 +140,24 @@ class GuessNumberFragment : Fragment() {
     private fun displayCheatToast() {
         val message = "${getString(R.string.HINT_MSG)}  ${viewModel.numberToGuess}"
         Toast.makeText(this.context, message, Toast.LENGTH_LONG).show()
+    }
+
+    // Service Connection Listener
+    private inner class ServiceConnectionHandler : ServiceConnection {
+        override fun onServiceConnected(
+            className: ComponentName,
+            binder: IBinder) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            val demoBinder = binder as MusicPlayerService.MusicServiceBinder
+            service = demoBinder.service
+            Log.d("ServiceConnection", "MusicPlayerService bound")
+            service.start()
+            stopMusicButton.isEnabled = true
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            Log.d("ServiceConnection", "onServiceDisconnected")
+        }
+
     }
 }
