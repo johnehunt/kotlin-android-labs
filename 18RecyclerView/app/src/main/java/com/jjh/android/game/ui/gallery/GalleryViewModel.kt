@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class GalleryViewModel : ViewModel() {
 
-    val heroes: List<Hero> = listOf(
+    private val heroes: List<Hero> = listOf(
         Hero("Gryff Smith", 3),
         Hero("Adam Jones", 2),
         Hero("Jasmine Davies", 2),

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.jjh.android.game.R
 
+
 /**
  * View used to display information about a play
  */
