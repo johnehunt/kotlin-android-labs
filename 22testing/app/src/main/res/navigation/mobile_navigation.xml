@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.jjh.android.game.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_game"
+        android:name="com.jjh.android.game.ui.guess.GuessNumberFragment"
+        android:label="Number Guess Game"
+        tools:layout="@layout/fragment_guess_number" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.jjh.android.game.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_drivers"
+        android:name="com.jjh.android.game.ui.drivers.DriversFragment"
+        android:label="@string/menu_drivers"
+        tools:layout="@layout/fragment_drivers" />
+</navigation>
