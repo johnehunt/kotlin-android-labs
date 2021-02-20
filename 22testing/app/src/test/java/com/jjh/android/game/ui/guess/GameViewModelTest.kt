@@ -35,14 +35,22 @@ class GameViewModelTest {
 
     @Test
     fun testCheckGuessWhenLower() {
-        val numberToGuess = viewModel.numberToGuess
+        var numberToGuess = viewModel.numberToGuess
+        while (numberToGuess == 1) {
+            viewModel.resetGameData()
+            numberToGuess = viewModel.numberToGuess
+        }
         val result = viewModel.checkGuess(numberToGuess - 1)
         assertEquals(GameViewModel.GUESS_LOWER, result)
     }
 
     @Test
     fun testCheckGuessWhenHigher() {
-        val numberToGuess = viewModel.numberToGuess
+        var numberToGuess = viewModel.numberToGuess
+        while (numberToGuess == 10) {
+            viewModel.resetGameData()
+            numberToGuess = viewModel.numberToGuess
+        }
         val result = viewModel.checkGuess(numberToGuess + 1)
         assertEquals(GameViewModel.GUESS_HIGHER, result)
     }
