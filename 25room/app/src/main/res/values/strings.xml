@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">25-room</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_drivers">F1 Drivers</string>
+
+    <string name="guess_a_number_between_1_and">Guess a number between 1 and</string>
+    <string name="guess">Guess</string>
+    <string name="enter_in_a_number">Enter in a number</string>
+    <string name="CORRECT_MSG">You guessed correctly! The number was</string>
+    <string name="HIGHER_MSG">The correct answer is higher"</string>
+    <string name="LOWER_MSG">The correct answer is lower</string>
+    <string name="HINT_MSG">Number to guess is</string>
+    <string name="MAX_MESSAGE_LIMIT_MSG">Maximum number of guesses made - number was</string>
+    <string name="NEW_NUMBER_MSG">- new number generated</string>
+    <string name="GUESSES_LEFT_MSG">Number of guesses left</string>
+    <string name="INVALID_MSG_PROMPT">"Invalid input (input must be between 1 and</string>
+</resources>
