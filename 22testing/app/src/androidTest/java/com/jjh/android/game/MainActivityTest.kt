@@ -49,7 +49,7 @@ class MainActivityTest {
             // Open the navigation drawer
             Espresso.onView(ViewMatchers.withId(R.id.drawer_layout))
                     .perform(DrawerActions.open())
-                    .check(ViewAssertions.matches(DrawerMatchers.isOpen())); // check it is open
+                    .check(ViewAssertions.matches(DrawerMatchers.isOpen())) // check it is open
         }
     }
 
