@@ -53,6 +53,10 @@ dependencies {
     implementation "com.google.dagger:dagger:2.32"
     kapt "com.google.dagger:dagger-compiler:2.32"
 
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.6'
+    implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
