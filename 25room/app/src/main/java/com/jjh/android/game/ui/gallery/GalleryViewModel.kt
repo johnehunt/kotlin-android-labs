@@ -1,18 +1,41 @@
 package com.jjh.android.game.ui.gallery
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.jjh.android.game.db.DefaultSchedulerProvider
+import com.jjh.android.game.db.HeroRepository
+import io.reactivex.rxjava3.core.Observable
 
 class GalleryViewModel : ViewModel() {
 
-    private val heroes: List<Hero> = listOf(
-        Hero("Gryff Smith", 3),
-        Hero("Adam Jones", 2),
-        Hero("Jasmine Davies", 2),
-        Hero("Phoebe Byrne", 2),
-    )
+    companion object {
+        private const val TAG = "GalleryViewModel"
+    }
+
+    lateinit var repository: HeroRepository
+
+    var heroes: List<Hero> = listOf<Hero>()
+
+    fun refresh(): Observable<List<Hero>> {
+        Log.d(TAG, "refresh()")
+        return repository.findAllHeroes()
+            .observeOn(DefaultSchedulerProvider.ui())
+            .doOnNext {
+                heroes = it
+            }
+    }
 
     val size
         get() = heroes.size
 
-    fun get(index: Int) = heroes[index]
+    fun get(index: Int): Hero {
+        return heroes[index]
+    }
+
+    fun addHero(hero: Hero): Observable<Long> {
+        Log.d(TAG, "addHero($hero)")
+        return repository
+            .addHero(hero)
+    }
+
 }
