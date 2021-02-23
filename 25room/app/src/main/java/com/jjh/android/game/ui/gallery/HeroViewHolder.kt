@@ -10,7 +10,7 @@ import com.jjh.android.game.R
 
 
 /**
- * View used to display information about a play
+ * View used to display information about a Game Hero
  */
 class HeroViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.heroes_list_layout, parent, false)) {
