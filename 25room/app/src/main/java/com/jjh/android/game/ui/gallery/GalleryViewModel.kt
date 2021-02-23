@@ -38,4 +38,10 @@ class GalleryViewModel : ViewModel() {
             .addHero(hero)
     }
 
+    fun deleteHero(hero: Hero): Observable<Int> {
+        Log.d(TAG, "deleteHero($hero)")
+        return repository
+            .deleteHero(hero)
+    }
+
 }

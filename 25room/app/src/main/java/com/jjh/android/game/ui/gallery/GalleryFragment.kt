@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jjh.android.game.R
 import com.jjh.android.game.db.HeroRepository
 import com.jjh.android.game.ui.gallery.HeroDialog.HeroDialogListener
 import kotlinx.android.synthetic.main.fragment_gallery.*
+
 
 class GalleryFragment : Fragment() {
 
@@ -24,7 +26,8 @@ class GalleryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 
@@ -36,7 +39,9 @@ class GalleryFragment : Fragment() {
         galleryViewModel.refresh().subscribe {
             hero_recycler_view.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = HeroAdapter(galleryViewModel)
+                adapter = HeroAdapter(context, galleryViewModel)
+                val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback((hero_recycler_view.adapter as HeroAdapter)))
+                itemTouchHelper.attachToRecyclerView(this)
             }
         }
 
