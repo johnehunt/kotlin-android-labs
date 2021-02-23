@@ -19,12 +19,13 @@ class HeroViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         private const val TAG = "PlayViewHolder"
     }
 
+    private val idView = itemView.findViewById<TextView>(R.id.heroId)
     private val titleView = itemView.findViewById<TextView>(R.id.heroName)
     private val yearView = itemView.findViewById<TextView>(R.id.guesses)
 
-
     fun bind(hero: Hero) {
         Log.d(TAG, "bind($hero)")
+        idView.text = hero.id.toString()
         titleView.text = hero.name
         yearView.text = hero.guesses.toString()
     }
