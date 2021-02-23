@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.jjh.android.game.db.DefaultSchedulerProvider
 
 /**
  * Provide binding from the hero list to HeroViewHolders displayed
@@ -30,8 +31,9 @@ class HeroAdapter(private val viewModel: GalleryViewModel) : RecyclerView.Adapte
      */
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
         Log.d(TAG, "onBindViewHolder($position)")
-        val hero: Hero = viewModel.get(position)
-        holder.bind(hero)
+        viewModel.get(position)?.run {
+            holder.bind(this)
+        }
     }
 
     /**
@@ -39,6 +41,18 @@ class HeroAdapter(private val viewModel: GalleryViewModel) : RecyclerView.Adapte
      * Returns the total number of Heroes in the data set held by the view model.
      */
     override fun getItemCount(): Int = viewModel.size
+
+    fun addHero(hero: Hero) {
+        Log.d(TAG, "addHero()")
+        viewModel.addHero(hero)
+            .observeOn(DefaultSchedulerProvider.ui())
+            .subscribe{
+                Log.d(TAG,"updating adapter data set changed")
+                viewModel.refresh().subscribe {
+                    notifyDataSetChanged()
+                }
+            }
+    }
 
 }
 
