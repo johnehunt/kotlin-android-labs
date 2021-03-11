@@ -78,7 +78,7 @@ class GuessNumberFragment : Fragment() {
     }
 
     private fun displayHintMessage(status: Int) {
-        var hint = if (status == GameViewModel.GUESS_HIGHER) {
+        val hint = if (status == GameViewModel.GUESS_HIGHER) {
             getString(R.string.LOWER_MSG)
         } else {
             getString(R.string.HIGHER_MSG)

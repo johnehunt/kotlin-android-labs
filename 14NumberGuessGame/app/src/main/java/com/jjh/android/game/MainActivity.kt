@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private var numberToGuess: Int
     private var guessCount = 0
-    private lateinit var invalidMessage: String
+    private var invalidMessage = ""
 
     init {
         numberToGuess = generateRandomNumber()
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayHintMessage(higher: Boolean) {
-        var hint = if (higher) {
+        val hint = if (higher) {
             getString(R.string.LOWER_MSG)
         } else {
             getString(R.string.HIGHER_MSG)
