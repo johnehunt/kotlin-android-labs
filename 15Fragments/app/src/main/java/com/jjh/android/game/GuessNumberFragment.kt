@@ -24,10 +24,6 @@ class GuessNumberFragment : Fragment() {
         numberToGuess = generateRandomNumber()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -37,19 +33,21 @@ class GuessNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up initial text displays
         titleTextView.text = titleTextView.text.toString() + MAX_NUMBER
         invalidMessage =
             "${getString(R.string.INVALID_MSG_PROMPT)} $MAX_NUMBER)"
-        guessButton.setOnClickListener {
-            onGuessButtonClick(it)
-        }
+
+        // Set up button handler
+        guessButton.setOnClickListener { onGuessButtonClick() }
     }
 
     private fun generateRandomNumber(): Int {
         return Random.nextInt(MAX_NUMBER) + 1
     }
 
-    fun onGuessButtonClick(v: View) {
+    private fun onGuessButtonClick() {
         val userInput = userGuessEditText.text.toString()
         try {
             val guessInput = userInput.toInt()
