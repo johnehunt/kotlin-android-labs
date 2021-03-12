@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_guess_number.*
 class GuessNumberFragment : Fragment() {
 
     private lateinit var invalidMessage: String
-    private val viewModel by viewModels<GameViewModel>()
+    private val viewModel by viewModels<GameNumberViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,16 +25,16 @@ class GuessNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        titleTextView.text = titleTextView.text.toString() + GameViewModel.MAX_NUMBER
+        titleTextView.text = titleTextView.text.toString() + GameNumberViewModel.MAX_NUMBER
         invalidMessage =
-            "${getString(R.string.INVALID_MSG_PROMPT)} ${GameViewModel.MAX_NUMBER})"
+            "${getString(R.string.INVALID_MSG_PROMPT)} ${GameNumberViewModel.MAX_NUMBER})"
 
         guessButton.setOnClickListener {
             onGuessButtonClick()
         }
     }
 
-    fun onGuessButtonClick() {
+    private fun onGuessButtonClick() {
         val userInput = userGuessEditText.text.toString()
         try {
             val guessInput = userInput.toInt()
@@ -43,14 +43,14 @@ class GuessNumberFragment : Fragment() {
                 displayCheatToast()
             } else {
                 when (viewModel.checkGuess(guessInput)) {
-                    GameViewModel.CORRECT_GUESS -> {
+                    GameNumberViewModel.CORRECT_GUESS -> {
                         messageTextView.text = getString(R.string.CORRECT_MSG) +
                                 " ${viewModel.numberToGuess} ${getString(R.string.NEW_NUMBER_MSG)}"
                         resetGame()
                     }
-                    GameViewModel.INVALID_GUESS -> displayInvalidUserInputMessage()
-                    GameViewModel.GUESS_HIGHER -> displayHintMessage(GameViewModel.GUESS_HIGHER)
-                    GameViewModel.GUESS_LOWER -> displayHintMessage(GameViewModel.GUESS_LOWER)
+                    GameNumberViewModel.INVALID_GUESS -> displayInvalidUserInputMessage()
+                    GameNumberViewModel.GUESS_HIGHER -> displayHintMessage(GameNumberViewModel.GUESS_HIGHER)
+                    GameNumberViewModel.GUESS_LOWER -> displayHintMessage(GameNumberViewModel.GUESS_LOWER)
                 }
 
                 // Check for max number of guesses
@@ -80,7 +80,7 @@ class GuessNumberFragment : Fragment() {
     }
 
     private fun displayHintMessage(status: Int) {
-        val hint = if (status == GameViewModel.GUESS_HIGHER) {
+        val hint = if (status == GameNumberViewModel.GUESS_HIGHER) {
             getString(R.string.LOWER_MSG)
         } else {
             getString(R.string.HIGHER_MSG)
@@ -90,6 +90,6 @@ class GuessNumberFragment : Fragment() {
 
     private fun displayCheatToast() {
         val message = "${getString(R.string.HINT_MSG)}  ${viewModel.numberToGuess}"
-        Toast.makeText(this.context, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 }

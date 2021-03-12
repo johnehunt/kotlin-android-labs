@@ -3,7 +3,7 @@ package com.jjh.android.game.ui.guess
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
 
-class GameViewModel: ViewModel() {
+class GameNumberViewModel: ViewModel() {
 
     companion object {
         const val MAX_NUMBER = 10
